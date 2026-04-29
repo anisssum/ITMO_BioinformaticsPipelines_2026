@@ -78,55 +78,44 @@ process trim_reads {
         --thread ${cpus} \
         --length_required 30
     
-    # Check if trimmed file is empty
-    if [ ! -s trimmed.fastq ]; then
-        echo "WARNING: Trimming produced empty file, using original reads"
-        cp ${reads} trimmed.fastq
-    fi
-    
     echo "Trimmed reads size:"
     wc -l trimmed.fastq
     """
 }
 
-// Process 4: Assemble reads (with better error handling)
+// Process 4: Assemble reads
 process assemble_reads {
     publishDir "${params.outdir}/assembly", mode: 'copy'
 
     input:
         path reads
-    
+
     output:
         path "assembly_contigs.fasta"
-    
+
     script:
     def cpus = task.cpus ?: 2
     """
-    # Check if reads file is not empty
     if [ ! -s ${reads} ]; then
-        echo "ERROR: Reads file is empty, creating dummy reference"
-        echo ">dummy_contig" > assembly_contigs.fasta
-        echo "ATCGATCGATCGATCGATCGATCGATCGATCGATCGATCG" >> assembly_contigs.fasta
+        echo "ERROR: Reads file is empty, cannot perform assembly"
+        exit 1
+    fi
+
+    # Run SPAdes assembly
+    spades.py -s ${reads} -o assembly \
+        -t ${cpus} \
+        -m 8 \
+        --only-assembler \
+        -k 21,33,55 \
+        --cov-cutoff auto
+
+    if [ -f assembly/contigs.fasta ] && [ -s assembly/contigs.fasta ]; then
+        cp assembly/contigs.fasta assembly_contigs.fasta
+        echo "Assembly successful. Number of contigs:"
+        grep -c "^>" assembly_contigs.fasta
     else
-        # Try assembly with different settings
-        spades.py -s ${reads} -o assembly \
-            -t ${cpus} \
-            -m 8 \
-            --only-assembler \
-            -k 21,33,55 \
-            --cov-cutoff auto || true
-        
-        # Check if assembly succeeded
-        if [ -f assembly/contigs.fasta ] && [ -s assembly/contigs.fasta ]; then
-            cp assembly/contigs.fasta assembly_contigs.fasta
-            echo "Assembly successful. Contigs:"
-            grep -c "^>" assembly_contigs.fasta
-        else
-            echo "WARNING: Assembly failed, creating dummy reference from reads"
-            # Extract first read as reference
-            head -n 2 ${reads} | grep -v "^+" | sed 's/^/@/>/' > assembly_contigs.fasta || \\
-            echo -e ">dummy_contig\nATCGATCGATCGATCGATCGATCGATCGATCGATCGATCG" > assembly_contigs.fasta
-        fi
+        echo "ERROR: Assembly failed, please check input reads and SPAdes logs"
+        exit 1
     fi
     """
 }
@@ -145,12 +134,15 @@ process map_reads {
     script:
     def cpus = task.cpus ?: 2
     """
-    # Check if reference is not empty
+    # Validate reference file
     if [ ! -s ${reference} ]; then
-        echo "ERROR: Reference file is empty, creating dummy reference"
-        echo ">dummy" > reference.fasta
-        echo "ATCGATCGATCGATCGATCGATCGATCGATCG" >> reference.fasta
-        reference="reference.fasta"
+        echo "ERROR: Reference file is empty or does not exist: ${reference}"
+        exit 1
+    fi
+    
+    if ! grep -q "^>" ${reference}; then
+        echo "ERROR: Reference file does not appear to be in FASTA format"
+        exit 1
     fi
     
     bwa index ${reference}
