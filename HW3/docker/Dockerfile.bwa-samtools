@@ -1,0 +1,27 @@
+# ============================================================
+#  bwa-samtools Docker image
+#  Tools: BWA 0.7.17, samtools 1.18
+#  Usage:  docker build -t youruser/bwa-samtools:1.0.0 -f Dockerfile.bwa-samtools .
+#          docker push youruser/bwa-samtools:1.0.0
+# ============================================================
+FROM ubuntu:22.04
+
+LABEL maintainer="your.email@example.com" \
+      description="BWA + samtools for read mapping" \
+      version="1.0.0"
+
+# Avoid interactive prompts during build
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        bwa=0.7.17-5 \
+        samtools=1.13-4 \
+        ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Verify tools are present
+RUN bwa 2>&1 | head -3 && samtools --version | head -1
+
+WORKDIR /data
+CMD ["/bin/bash"]

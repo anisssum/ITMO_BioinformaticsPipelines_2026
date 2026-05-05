@@ -1,0 +1,32 @@
+# ============================================================
+#  r-ggplot2 Docker image
+#  Tools: R 4.3, ggplot2, samtools (for depth calculation)
+#  Usage:  docker build -t youruser/r-ggplot2:1.0.0 -f Dockerfile.r-ggplot2 .
+#          docker push youruser/r-ggplot2:1.0.0
+# ============================================================
+FROM r-base:4.3.1
+
+LABEL maintainer="your.email@example.com" \
+      description="R + ggplot2 for coverage plotting" \
+      version="1.0.0"
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Install system deps + samtools for depth step
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        samtools \
+        libcurl4-openssl-dev \
+        libssl-dev \
+        libxml2-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install R packages from CRAN
+RUN Rscript -e "install.packages(c('ggplot2'), repos='https://cloud.r-project.org', quiet=TRUE)"
+
+# Verify
+RUN Rscript -e "library(ggplot2); cat('ggplot2 OK\n')"
+RUN samtools --version | head -1
+
+WORKDIR /data
+CMD ["/bin/bash"]
