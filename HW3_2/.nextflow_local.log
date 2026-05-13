@@ -1,0 +1,185 @@
+May-13 12:00:58.159 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf -profile local --input_reads_folder ./results_local/raw_reads/ --assembly true --outdir results_local
+May-13 12:00:58.338 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+May-13 12:00:58.376 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/anya/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+May-13 12:00:58.419 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+May-13 12:00:58.420 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+May-13 12:00:58.425 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+May-13 12:00:58.455 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+May-13 12:00:58.705 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+May-13 12:00:58.756 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/nextflow.config
+May-13 12:00:58.761 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/nextflow.config
+May-13 12:00:58.832 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `local`
+May-13 12:00:59.606 [main] DEBUG nextflow.config.ConfigBuilder - Available config profiles: [container, cluster, local]
+May-13 12:00:59.661 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+May-13 12:00:59.661 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+May-13 12:00:59.690 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/anya/.nextflow/secrets/store.json
+May-13 12:00:59.696 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@77dba4cd] - activable => nextflow.secret.LocalSecretsProvider@77dba4cd
+May-13 12:00:59.699 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+May-13 12:00:59.721 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [angry_legentil] DSL2 - revision: 1f5d5598ef
+May-13 12:00:59.814 [main] DEBUG nextflow.Session - Session UUID: d954bbbe-bc41-473d-b7c1-491e1b198d41
+May-13 12:00:59.815 [main] DEBUG nextflow.Session - Run name: angry_legentil
+May-13 12:00:59.815 [main] DEBUG nextflow.Session - Executor pool size: 4
+May-13 12:00:59.830 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+May-13 12:00:59.839 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-13 12:00:59.875 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11173
+  Created: 10-02-2026 15:17 UTC (22:17 NOVST)
+  System: Linux 5.15.0-139-generic
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 21.0.6+9-b895.97
+  Encoding: UTF-8 (UTF-8)
+  Process: 1814413@k338a [127.0.1.1]
+  CPUs: 4 - Mem: 15.6 GB (2.2 GB) - Swap: 4.9 GB (3.5 GB)
+May-13 12:00:59.910 [main] DEBUG nextflow.Session - Work-dir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work [ext2/ext3]
+May-13 12:00:59.911 [main] DEBUG nextflow.Session - Script base path does not exist or is not a directory: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/bin
+May-13 12:00:59.923 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+May-13 12:00:59.936 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+May-13 12:00:59.941 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+May-13 12:01:00.014 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+May-13 12:01:00.028 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 5; maxThreads: 1000
+May-13 12:01:00.101 [main] DEBUG nextflow.Session - Session start
+May-13 12:01:00.541 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+May-13 12:01:01.788 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.789 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.806 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+May-13 12:01:01.820 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=4; memory=15.6 GB; capacity=4; pollInterval=100ms; dumpInterval=5m
+May-13 12:01:01.824 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+May-13 12:01:01.866 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'qc_raw': maxForks=0; fair=false; array=0
+May-13 12:01:01.927 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.927 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.929 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'trim_reads': maxForks=0; fair=false; array=0
+May-13 12:01:01.936 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.936 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.937 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'qc_trimmed:qc_raw': maxForks=0; fair=false; array=0
+May-13 12:01:01.944 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.944 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.946 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'assemble_reads': maxForks=0; fair=false; array=0
+May-13 12:01:01.953 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.954 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.955 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'map_reads': maxForks=0; fair=false; array=0
+May-13 12:01:01.961 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:01.961 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:01.962 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'plot_coverage': maxForks=0; fair=false; array=0
+May-13 12:01:02.020 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:02.020 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:02.022 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'BCFTOOLS_MPILEUP': maxForks=0; fair=false; array=0
+May-13 12:01:02.054 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-13 12:01:02.054 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-13 12:01:02.055 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'BCFTOOLS_CALL': maxForks=0; fair=false; array=0
+May-13 12:01:02.064 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: qc_trimmed:qc_raw, plot_coverage, trim_reads, qc_raw, BCFTOOLS_MPILEUP, download_sra, assemble_reads, map_reads, BCFTOOLS_CALL
+May-13 12:01:02.072 [main] DEBUG nextflow.Session - Igniting dataflow network (9)
+May-13 12:01:02.082 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > qc_raw
+May-13 12:01:02.082 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > trim_reads
+May-13 12:01:02.084 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > qc_trimmed:qc_raw
+May-13 12:01:02.086 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > assemble_reads
+May-13 12:01:02.088 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > map_reads
+May-13 12:01:02.088 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > plot_coverage
+May-13 12:01:02.089 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BCFTOOLS_MPILEUP
+May-13 12:01:02.089 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > BCFTOOLS_CALL
+May-13 12:01:02.090 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_063136ced033632a: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/nf-core/bcftools/call/main.nf
+  Script_79df7652340f2793: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/qc_raw.nf
+  Script_bc6a35da36f04573: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/assemble_reads.nf
+  Script_6a088829b034817a: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/trim_reads.nf
+  Script_abf8a2779466c2d2: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/download_sra.nf
+  Script_b1d2d5848b7f1f58: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/main.nf
+  Script_b0d1cf8580b45fd5: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/map_reads.nf
+  Script_adcc1df0c019d7b4: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/processes/plot_coverage.nf
+  Script_438d0a3d9e9086f3: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/modules/nf-core/bcftools/mpileup/main.nf
+May-13 12:01:02.090 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+May-13 12:01:02.090 [main] DEBUG nextflow.Session - Session await
+May-13 12:01:02.090 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: ./results_local/raw_reads/; pattern: *.fastq; options: [:]
+May-13 12:01:02.383 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 12:01:02.388 [Task submitter] INFO  nextflow.Session - [bb/b805d8] Submitted process > qc_raw (1)
+May-13 12:01:02.407 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 12:01:02.412 [Task submitter] INFO  nextflow.Session - [d9/08c9cc] Submitted process > trim_reads (1)
+May-13 12:01:39.381 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: trim_reads (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/d9/08c9ccc2f7a73b33433e5c586038ad]
+May-13 12:01:39.384 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-13 12:01:39.424 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 12:01:39.435 [Task submitter] INFO  nextflow.Session - [66/e8d4db] Submitted process > assemble_reads (1)
+May-13 12:01:39.453 [TaskFinalizer-1] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=12; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-13 12:03:08.357 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: qc_raw (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/bb/b805d853c4dbfa44303aca12841a46]
+May-13 12:03:10.330 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 12:03:10.349 [Task submitter] INFO  nextflow.Session - [22/4bde88] Submitted process > qc_trimmed:qc_raw (1)
+May-13 12:04:20.443 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: qc_trimmed:qc_raw (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/22/4bde884c3271d6ff0b7a4705ef3b9f]
+May-13 12:06:01.996 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:11:02.087 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:16:02.116 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:21:02.665 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:26:02.250 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:31:02.347 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:36:02.358 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:41:02.375 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:46:02.417 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:51:02.473 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 12:56:02.552 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:01:02.633 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:06:02.721 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:11:02.818 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:16:02.896 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:21:02.981 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:26:03.030 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:31:03.112 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:36:03.133 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:41:03.194 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:46:03.285 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:51:03.368 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 3; name: assemble_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:55:20.738 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: assemble_reads (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/66/e8d4db51eeefce86f47d221351ffda]
+May-13 13:55:20.975 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 13:55:20.976 [Task submitter] INFO  nextflow.Session - [24/003d71] Submitted process > map_reads (1)
+May-13 13:56:03.374 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:01:03.439 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:06:03.495 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:11:03.506 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:16:03.570 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:21:03.622 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:26:03.680 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:31:03.736 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:36:03.795 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:41:03.862 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:46:03.928 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 1 -- submitted tasks are shown below
+~> TaskHandler[id: 5; name: map_reads (1); status: RUNNING; exit: -; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:48:11.150 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: map_reads (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/24/003d7118e508b8f64297d711f3a6e7]
+May-13 14:48:11.817 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-13 14:48:11.824 [Task submitter] INFO  nextflow.Session - [27/1f0d0b] Submitted process > plot_coverage (1)
+May-13 14:48:19.056 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: plot_coverage (1); status: COMPLETED; exit: 0; error: -; workDir: /home/anya/itmo/ITMO_BioinformaticsPipelines_2026/HW3_2/work/27/1f0d0bf44f8fc33ce1904c9f1bc5dc]
+May-13 14:48:19.086 [main] DEBUG nextflow.Session - Session await > all processes finished
+May-13 14:48:19.159 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+May-13 14:48:19.159 [main] DEBUG nextflow.Session - Session await > all barriers passed
+May-13 14:48:19.231 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'TaskFinalizer' shutdown completed (hard=false)
+May-13 14:48:19.232 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'PublishDir' shutdown completed (hard=false)
+May-13 14:48:19.340 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=6; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=5h 41m 2s; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=3; peakCpus=6; peakMemory=12 GB; ]
+May-13 14:48:19.692 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+May-13 14:48:19.749 [main] DEBUG nextflow.util.ThreadPoolManager - Thread pool 'FileTransfer' shutdown completed (hard=false)
+May-13 14:48:19.750 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye

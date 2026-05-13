@@ -2,131 +2,21 @@
 
 nextflow.enable.dsl=2
 
-params.input_reads_folder = ''
 params.sra_id = ''
+params.input_reads_folder = ''
 params.reference = ''
 params.assembly = false
 params.outdir = './results'
 params.threads = 2
 
-process download_sra {
-
-    publishDir "${params.outdir}/raw_reads", mode: 'copy'
-
-    input:
-    val sra_id
-
-    output:
-    path "*.fastq"
-
-    script:
-    """
-    /home/anya/sratoolkit.3.4.1-ubuntu64/bin/fasterq-dump ${sra_id}
-    """
-}
-
-process qc_raw {
-
-    publishDir "${params.outdir}/qc_raw", mode: 'copy'
-
-    input:
-    path reads
-
-    output:
-    path "*.html"
-
-    script:
-    """
-    fastqc ${reads}
-    """
-}
-
-process trim_reads {
-
-    publishDir "${params.outdir}/trimmed", mode: 'copy'
-
-    input:
-    path reads
-
-    output:
-    path "trimmed.fastq"
-
-    script:
-    """
-    fastp -i ${reads} -o trimmed.fastq
-    """
-}
-
-process assemble_reads {
-
-    publishDir "${params.outdir}/assembly", mode: 'copy'
-
-    input:
-    path reads
-
-    output:
-    path "contigs.fasta"
-
-    script:
-    """
-    spades.py \
-        -s ${reads} \
-        -o spades_out
-
-    cp spades_out/contigs.fasta contigs.fasta
-    """
-}
-
-process map_reads {
-
-    publishDir "${params.outdir}/mapping", mode: 'copy'
-
-    input:
-    path reads
-    path reference
-
-    output:
-    path "mapped.bam"
-
-    script:
-    """
-    bwa index ${reference}
-
-    bwa mem ${reference} ${reads} > aln.sam
-
-    samtools view -bS aln.sam > aln.bam
-
-    samtools sort aln.bam -o mapped.bam
-
-    samtools index mapped.bam
-    """
-}
-
-process call_variants {
-
-    publishDir "${params.outdir}/variants", mode: 'copy'
-
-    input:
-    path bam
-    path reference
-
-    output:
-    path "variants.vcf"
-
-    script:
-    """
-    samtools faidx ${reference}
-
-    bcftools mpileup \
-        -Ou \
-        -f ${reference} \
-        ${bam} | \
-    bcftools call \
-        -mv \
-        -Ov \
-        -o variants.vcf
-    """
-}
+include { download_sra } from './modules/processes/download_sra'
+include { qc_raw  ; qc_trimmed} from './modules/processes/qc_raw'
+include { trim_reads } from './modules/processes/trim_reads'
+include { assemble_reads } from './modules/processes/assemble_reads'
+include { map_reads } from './modules/processes/map_reads'
+include { plot_coverage } from './modules/processes/plot_coverage'
+include { BCFTOOLS_CALL } from './modules/nf-core/bcftools/call/main'
+include { BCFTOOLS_MPILEUP } from './modules/nf-core/bcftools/mpileup/main'
 
 workflow {
 
@@ -137,9 +27,16 @@ workflow {
         reads_ch = Channel.fromPath("${params.input_reads_folder}/*.fastq")
     }
 
-    qc_raw(reads_ch)
+    split_reads_ch = reads_ch.multiMap { reads ->
+        qc_in: reads
+        trim_in: reads
+    }
 
-    trimmed_ch = trim_reads(reads_ch)
+    qc_raw(split_reads_ch.qc_in)
+
+    trimmed_ch = trim_reads(split_reads_ch.trim_in)
+
+    qc_trimmed(trimmed_ch)
 
     if (params.reference) {
         ref_ch = Channel.fromPath(params.reference)
@@ -150,5 +47,26 @@ workflow {
 
     bam_ch = map_reads(trimmed_ch, ref_ch)
 
-    call_variants(bam_ch, ref_ch)
+    plot_coverage(bam_ch)
+
+    bam_ref_ch = bam_ch.join(ref_ch)
+
+    def split_channels = bam_ref_ch.multiMap { sample_id, bam, reference ->
+        bam_input: tuple( [id: sample_id, single_end: false], bam, [], [] )
+        fasta_input: tuple( [id: 'reference'], reference, [] )
+    }
+
+    mpileup_out = BCFTOOLS_MPILEUP(
+        split_channels.bam_input,
+        split_channels.fasta_input.first(),
+        false)
+
+    vcf_ch = mpileup_out.vcf.map { meta, vcf ->
+        tuple( [id: meta.id], vcf )}
+
+        BCFTOOLS_CALL(
+        vcf_ch,                        
+        split_channels.fasta_input.first(),  
+        [],                            
+        [])
 }
