@@ -1,0 +1,5 @@
+sample_id,group,type,sra_id,ref_id
+cov2_a,sarscov2,sample_a,DRR402900,NC_045512.2
+cov2_b,sarscov2,sample_b,DRR402894,NC_045512.2
+hiv1_a,hiv1,sample_a,DRR030147,K03455.1
+hiv1_b,hiv1,sample_b,DRR030221,K03455.1

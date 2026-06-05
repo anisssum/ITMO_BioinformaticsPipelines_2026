@@ -1,0 +1,32 @@
+name: genomics-pipeline
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+
+dependencies:
+  # SRA download
+  - sra-tools=3.0.7
+
+  # QC
+  - fastqc=0.12.1
+  - fastp=0.23.4
+  - multiqc=1.19
+
+  # Assembly
+  - spades=3.15.5
+
+  # Mapping & BAM processing
+  - bwa=0.7.17
+  - samtools=1.18
+
+  # Variant calling
+  - bcftools=1.18
+
+  # Reference fetching
+  - entrez-direct=16.2
+
+  # Coverage plotting
+  - r-base=4.3.1
+  - r-ggplot2=3.4.4
+  - bioconductor-genomicranges=1.54.1
